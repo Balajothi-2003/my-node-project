@@ -1,11 +1,17 @@
-const express = require('express');
+const express = require("express");
+
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.use(express.json());
+
+// import routes
+const authRoutes = require("./src/routes/authRoutes");
+
+// use routes
+app.use("/api/auth", authRoutes);
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+module.exports = app;
